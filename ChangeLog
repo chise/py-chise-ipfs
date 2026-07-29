@@ -11,3 +11,7 @@
 2026-07-27  MORIOKA Tomohiko  <tomo.git@chise.org>
 
 	* ipld/ipld.py: New file.
+
+2026-06-20  MORIOKA Tomohiko  <tomo.git@chise.org>
+
+	* data/oid_node-cid.tsv: New file.
