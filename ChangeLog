@@ -14,4 +14,6 @@
 
 2026-06-20  MORIOKA Tomohiko  <tomo.git@chise.org>
 
+	* data/gCCS_cpos_oid.tsv: New file.
+
 	* data/oid_node-cid.tsv: New file.
