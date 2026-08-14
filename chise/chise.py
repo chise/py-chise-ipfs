@@ -2,6 +2,20 @@ import re
 import libipld
 import ipld
 
+def decode_char (ccs, cpos):
+    with open('data/gCCS_cpos_oid.tsv', 'r') as f:
+        for line in f:
+            match = re.search(f'^{re.escape(ccs)}\t{cpos}\t([^\t\n\r]+?)$', line)
+            if match:
+                oid = match.group(1)
+                match = re.search('^[0-9]+$', oid)
+                if match:
+                    return chr(int(oid))
+                else:
+                    return {'genre': 'character',
+                            'id': oid,
+                            'ref': {'/': oid}}
+
 def oid_to_node_id (character):
     if isinstance(character, dict):
         ref = character.get('ref', None)
