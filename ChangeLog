@@ -1,3 +1,13 @@
+2026-08-14  MORIOKA Tomohiko  <tomo.git@chise.org>
+
+	* ipld/ipld.py (IPFS_API_URL): Revived.
+	(ipfs_gw_dag_get): Renamed from `dag_get'.
+	(block_api_dag_get): New function.
+	(dag_get): Use `block_api_dag_get' if it is available, otherwise
+	use `ipfs_gw_dag_get' as the fallback.
+
+	* chise/chise.py (decode_char): New function.
+
 2026-07-28  MORIOKA Tomohiko  <tomo.git@chise.org>
 
 	* chise/__init__.py: New file.
