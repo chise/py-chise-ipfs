@@ -2,6 +2,31 @@ import re
 import libipld
 import ipld
 
+def split_ccs_feature_name_granularity (feature_name):
+    match = re.search('^(=\+>)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'unified-glyph'
+    match = re.search('^(=)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'abstract-glyph'
+    match = re.search('^(==)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'abstract-glyph-form'
+    match = re.search('^(===)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'glyph-image'
+    match = re.search('^(=>>)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'detailed-glyph'
+    match = re.search('^(=>)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'abstract-character'
+    match = re.search('^(==>)([^=>]+)$', feature_name)
+    if match:
+        return match.group(2),'super-abstract-character'
+    else:
+        return feature_name, None
+
 def decode_char (ccs, cpos):
     with open('data/gCCS_cpos_oid.tsv', 'r') as f:
         for line in f:
@@ -15,6 +40,15 @@ def decode_char (ccs, cpos):
                     return {'genre': 'character',
                             'id': oid,
                             'ref': {'/': oid}}
+
+def encode_char (character, ccs):
+    ccs_base, ccs_granularity = split_ccs_feature_name_granularity(ccs)   
+    ref = get_section(character, 'ref')
+    granularity = ref['granularity']
+    if ( granularity == ccs_granularity ):
+       spec = get_section(character, 'ref/spec')
+       if ccs_base in spec:
+       	  return spec[ccs_base]
 
 def oid_to_node_id (character):
     if isinstance(character, dict):
