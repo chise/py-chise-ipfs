@@ -1,3 +1,9 @@
+2026-10-20  MORIOKA Tomohiko  <tomo.git@chise.org>
+
+	* chise/chise.py (split_ccs_feature_name_granularity): New
+	function.
+	(encode_char): New function.
+
 2026-08-14  MORIOKA Tomohiko  <tomo.git@chise.org>
 
 	* ipld/ipld.py (IPFS_API_URL): Revived.
